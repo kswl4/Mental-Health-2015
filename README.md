@@ -1,62 +1,106 @@
 # Mental-Health-2015
 # 🧠 Mental Health in America: 2015 Analysis
 
-## 📌 Overview
-Using CDC survey data from over 330,000 Americans, this project explores what factors are most associated with poor mental health outcomes — including age, income, and exercise habits.
-
-**🔗 [View Live Tableau Dashboard](https://public.tableau.com/app/profile/kiasha.williams/viz/MentalHealthonAmerica2015/Dashboard1)**
-
----
-
-## ❓ Questions Explored
-
-1. Which age group reports the most poor mental health days?
-2. Does exercise frequency affect mental health outcomes?
-3. Does income level impact mental health?
-
----
-
-## 🔍 Key Findings
-
-- **18–24 year olds** report the highest average number of poor mental health days per month
-- **People who don't exercise** report significantly more poor mental health days than those who do
-- **Lower income (under $10k/year)** is strongly associated with worse mental health outcomes — with a clear improvement as income rises
-
----
-
-## 🛠️ Tools Used
-
 ![Python](https://img.shields.io/badge/Python-9B59B6?style=for-the-badge&logo=python&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-7D3C98?style=for-the-badge&logo=pandas&logoColor=white)
 ![Tableau](https://img.shields.io/badge/Tableau-A569BD?style=for-the-badge&logo=tableau&logoColor=white)
 
----
-
-## 📂 Files
-
-| File | Description |
-|---|---|
-| `mental_health.ipynb` | Full analysis notebook — cleaning, exploration, and visualizations |
-| `2015_cleaned.csv` | Cleaned dataset (332,938 rows, 9 columns) |
-| `mental_health_by_age.png` | Chart — avg poor mental health days by age group |
-| `mental_health_by_exercise.png` | Chart — avg poor mental health days by exercise habit |
-| `mental_health_by_income.png` | Chart — avg poor mental health days by income level |
+## 📚 Table of Contents
+- [Project Overview](#project-overview)
+- [Data Source](#data-source)
+- [Data Cleaning](#data-cleaning)
+- [Questions and Findings](#questions-and-findings)
+- [Business Recommendations](#business-recommendations)
+- [Dashboard](#dashboard)
 
 ---
 
-## 🧹 Data Cleaning Steps
+## Project Overview
 
+Using CDC survey data from over 330,000 Americans, this project explores what factors are most associated with poor mental health outcomes — including age, income, and exercise habits.
+
+---
+
+## Data Source
+
+[CDC Behavioral Risk Factor Surveillance System (BRFSS) 2015](https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-surveillance-system) via Kaggle
+
+- **Raw dataset:** 441,456 rows · 330 columns
+- **Columns used:** MENTHLTH, PHYSHLTH, GENHLTH, SEX, _AGEG5YR, INCOME2, EDUCA, EXERANY2, _STATE
+
+---
+
+## Data Cleaning
+
+```python
+cols = ['MENTHLTH', 'PHYSHLTH', 'GENHLTH', 'SEX', '_AGEG5YR', 'INCOME2', 'EDUCA', 'EXERANY2', '_STATE']
+df_clean = df[cols].dropna()
+
+df_clean = df_clean.copy()
+df_clean['MENTHLTH'] = df_clean['MENTHLTH'].replace(88, 0)
+
+df_clean = df_clean[~df_clean['MENTHLTH'].isin([77, 99])]
+df_clean = df_clean[~df_clean['GENHLTH'].isin([7, 9])]
+df_clean = df_clean[~df_clean['EXERANY2'].isin([7, 9])]
+df_clean = df_clean[~df_clean['INCOME2'].isin([77, 99])]
+```
+
+#### Steps:
 - Selected 9 relevant columns from 330 total
+- Dropped rows with missing values
 - Replaced coded value `88` (meaning zero days) with `0`
 - Removed unknown/refused response codes (77, 99)
-- Dropped rows with missing values
-- Final dataset: **332,938 rows**
+
+#### Result:
+- **Final dataset:** 332,938 rows · 9 columns
 
 ---
 
-## 💡 Business Recommendations
+## Questions and Findings
 
-Based on the findings, here are 3 actionable recommendations:
+**1. Which age group reports the most poor mental health days?**
+
+```python
+age_mental = df_clean.groupby('AGE_LABEL')['MENTHLTH'].mean()
+```
+
+#### Answer:
+- **18–24 year olds** report the highest average number of poor mental health days per month
+- Poor mental health days decrease steadily as age increases
+
+![Age Chart](charts/mental_health_by_age.png)
+
+---
+
+**2. Does exercise affect mental health outcomes?**
+
+```python
+exercise_mental = df_clean.groupby('EXERCISE_LABEL')['MENTHLTH'].mean()
+```
+
+#### Answer:
+- People who **do not exercise** report significantly more poor mental health days
+- Exercise appears to be strongly associated with better mental health outcomes
+
+![Exercise Chart](charts/mental_health_by_exercise.png)
+
+---
+
+**3. Does income level impact mental health?**
+
+```python
+income_mental = df_clean.groupby('INCOME_LABEL')['MENTHLTH'].mean()
+```
+
+#### Answer:
+- **Under $10k/year** has the highest average poor mental health days
+- There is a clear and consistent improvement in mental health as income increases
+- The jump between the lowest and highest income groups is significant
+
+![Income Chart](charts/mental_health_by_income.png)
+
+---
+
+## Business Recommendations
 
 **1. Target Youth Mental Health Programs (18–24)**
 Young adults report the highest number of poor mental health days. Companies in wellness, insurance, and healthcare should prioritize this age group through affordable therapy apps, campus partnerships, and mental health benefits for entry-level workers.
@@ -69,10 +113,8 @@ Poor mental health days spike sharply at the lowest income level. Policy recomme
 
 ---
 
-## 📊 Data Source
+## Dashboard
 
-[CDC Behavioral Risk Factor Surveillance System (BRFSS) 2015](https://www.kaggle.com/datasets/cdc/behavioral-risk-factor-surveillance-system) via Kaggle
+🔗 [View Live Tableau Dashboard](https://public.tableau.com/app/profile/kiasha.williams/viz/MentalHealthonAmerica2015/Dashboard1)
 
----
 
-*This is my first data analytics project as part of my portfolio. Built using Python and Tableau.*
