@@ -101,7 +101,7 @@ income_mental = df_clean.groupby('INCOME_LABEL')['MENTHLTH'].mean()
 - There is a clear and consistent improvement in mental health as income increases
 - The jump between the lowest and highest income groups is significant
 
-![Income Chart](charts/mental_health_by_income.png)
+![Income Chart](https://github.com/kswl4/Mental-Health-2015/blob/main/output3.png)
 
 ---
 
