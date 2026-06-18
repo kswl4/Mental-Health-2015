@@ -105,6 +105,14 @@ income_mental = df_clean.groupby('INCOME_LABEL')['MENTHLTH'].mean()
 
 ![Income Chart](https://github.com/kswl4/Mental-Health-2015/blob/main/output3.png)
 
+## Limitations
+
+- **Data is from 2015** — findings may not reflect current mental health trends
+- **Phone survey bias** — BRFSS is conducted via telephone, which may underrepresent younger, lower-income, or minority populations who are less likely to respond
+- **Correlation, not causation** — the data shows associations (e.g. exercise and better mental health) but cannot prove one causes the other
+- **Incomplete picture** — we used 9 of 330 available columns, meaning other factors like race, employment status, or access to healthcare were not explored
+
+---
 ---
 
 ## Business Recommendations
