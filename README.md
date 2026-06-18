@@ -58,6 +58,7 @@ df_clean = df_clean[~df_clean['INCOME2'].isin([77, 99])]
 | **Before** | 441,456 | 330 |
 | **After** | 332,938 | 9 |
 
+![before cleaning](https://github.com/kswl4/Mental-Health-2015/blob/main/Data%20before%20cleaning.png)
 ---
 
 ## Questions and Findings
