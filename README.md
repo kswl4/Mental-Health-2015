@@ -1,4 +1,5 @@
 # Mental-Health-2015
+
 # 🧠 Mental Health in America: 2015 Analysis
 
 ![Python](https://img.shields.io/badge/Python-9B59B6?style=for-the-badge&logo=python&logoColor=white)
@@ -50,8 +51,12 @@ df_clean = df_clean[~df_clean['INCOME2'].isin([77, 99])]
 - Replaced coded value `88` (meaning zero days) with `0`
 - Removed unknown/refused response codes (77, 99)
 
-#### Result:
-- **Final dataset:** 332,938 rows · 9 columns
+#### Before vs After Cleaning:
+
+| | Rows | Columns |
+|---|---|---|
+| **Before** | 441,456 | 330 |
+| **After** | 332,938 | 9 |
 
 ---
 
@@ -67,7 +72,7 @@ age_mental = df_clean.groupby('AGE_LABEL')['MENTHLTH'].mean()
 - **18–24 year olds** report the highest average number of poor mental health days per month
 - Poor mental health days decrease steadily as age increases
 
-![Age Chart](https://github.com/kswl4/Mental-Health-2015/blob/main/output.png))
+![Age Chart](charts/mental_health_by_age.png)
 
 ---
 
@@ -116,5 +121,4 @@ Poor mental health days spike sharply at the lowest income level. Policy recomme
 ## Dashboard
 
 🔗 [View Live Tableau Dashboard](https://public.tableau.com/app/profile/kiasha.williams/viz/MentalHealthonAmerica2015/Dashboard1)
-
 
