@@ -72,7 +72,7 @@ age_mental = df_clean.groupby('AGE_LABEL')['MENTHLTH'].mean()
 - **18–24 year olds** report the highest average number of poor mental health days per month
 - Poor mental health days decrease steadily as age increases
 
-![Age Chart](charts/mental_health_by_age.png)
+![Age Chart](https://github.com/kswl4/Mental-Health-2015/blob/main/output.png)
 
 ---
 
