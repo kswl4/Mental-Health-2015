@@ -86,7 +86,7 @@ exercise_mental = df_clean.groupby('EXERCISE_LABEL')['MENTHLTH'].mean()
 - People who **do not exercise** report significantly more poor mental health days
 - Exercise appears to be strongly associated with better mental health outcomes
 
-![Exercise Chart](charts/mental_health_by_exercise.png)
+![Exercise Chart](https://github.com/kswl4/Mental-Health-2015/blob/main/output%202.png)
 
 ---
 
